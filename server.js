@@ -7,13 +7,14 @@ const readFile = ((filePath) =>
 {
 	console.log("reading file ", filePath);
         const data = fs.readFileSync(filePath, 'utf8')
-        console.log(data)
         return data;
 });
 
 app.get('/', (req, res) => {
   console.log("Got new request");
-  res.send('Contenu de l\'historique : ', readFile("/tmp/discord_history.txt"));
+  let fileContent = readFile("/tmp/discord_history.txt");
+  console.log("retrieved this history", fileContent);
+  res.send('Contenu de l\'historique : ' + fileContent); // + readFile("/tmp/discord_history.txt"));
 })
 
 app.listen(port, () => {
